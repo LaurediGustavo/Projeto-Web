@@ -40,10 +40,22 @@ public class LoginModel {
 	
 	public void iniciarSessao(HttpSession session, Usuario usuario) {
 		session.setAttribute("user", usuario.getId());
-		session.setMaxInactiveInterval(60);
+		session.setMaxInactiveInterval(200);
 	}
 	
 	public void fecharSessao(HttpSession session) {
 		session.invalidate();
+	}
+	
+	public boolean sessaoAberta(HttpSession session) {
+		boolean isValid = true;
+		
+		Long attributeSession = (Long) session.getAttribute("user");
+		
+		if(attributeSession == null || attributeSession.longValue() == 0) {
+			isValid = false;
+		}
+		
+		return isValid;
 	}
 }

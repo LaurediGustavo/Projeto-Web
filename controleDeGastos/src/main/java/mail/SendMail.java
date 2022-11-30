@@ -30,6 +30,7 @@ public class SendMail {
 			this.properties.put("mail.smtp.socketFactory.port", smtpPort);
 			this.properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
 			this.properties.put("mail.smtp.auth", "true");
+			this.properties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
 		}
 		
 		if (auth.toLowerCase().equals("none")){

@@ -12,21 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import controleDeGastos.entity.Gasto;
+import controleDeGastos.entity.Ganho;
 import controleDeGastos.excption.ConstraintExcption;
-import controleDeGastos.model.GastoModel;
+import controleDeGastos.model.GanhoModel;
 
-@WebServlet("/gasto")
-public class GastoController extends HttpServlet {
+@WebServlet("/ganho")
+public class GanhoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private GastoModel gastoModel;
+	private GanhoModel ganhoModel;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.gastoModel = new GastoModel();
+		ganhoModel = new GanhoModel();
 	}
 	
 	@Override
@@ -37,8 +37,8 @@ public class GastoController extends HttpServlet {
 			String descricao = req.getParameter("descricao");
 			Long idUsuario = (Long) req. getSession().getAttribute("user");
 			
-			Gasto gasto = gastoModel.create(0L, valor, descricao, idUsuario);
-			gastoModel.insert(gasto);
+			Ganho ganho = ganhoModel.create(0L, valor, descricao, idUsuario);
+			ganhoModel.insert(ganho);
 			resp.getWriter().print("true");
 		}
 		catch (ConstraintExcption e) {
@@ -55,8 +55,8 @@ public class GastoController extends HttpServlet {
 		try {
 			Long idUsuario = (Long) req. getSession().getAttribute("user");
 			
-			List<Gasto> gastos = gastoModel.consultarPorUsuarioId(idUsuario);
-			resp.getWriter().print(gastoModel.listToJson(gastos));
+			List<Ganho> ganhos = ganhoModel.consultarPorUsuarioId(idUsuario);
+			resp.getWriter().print(ganhoModel.listToJson(ganhos));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

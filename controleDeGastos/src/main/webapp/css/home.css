@@ -1,0 +1,71 @@
+.alturaDiv {
+	height: 98vh;
+}
+
+.alturaDivGanho {
+	height: 80%;
+	margin-bottom: 10px;
+}
+
+#panelGastos, #panelGanhos {
+	overflow-y: scroll;
+}
+
+.lista {
+	width: 100%;
+	height: 8vh;
+	background-color: #050A17;
+	margin-bottom: 5px;
+	padding: 5px;
+}
+
+.listaNome {
+	float: left;
+	margin: 6px 0 0 10px;
+}
+
+.listaData {
+	float: right;
+	margin: 6px 10px 0 0;
+}
+
+.painelDeControleUsuario {
+	height: 52vh;
+}
+
+.painelDeControleDados {
+	height: 30vh;
+	margin-bottom: 10px;
+}
+
+.divValores {
+	width: 100%;
+}
+
+.divValores p {
+	font-size: 20px;
+	color: #030022;
+	font-weight: bold;
+}
+
+.divValores span {
+	color: #030022;
+	font-weight: bold;
+}
+
+.valorGanho {
+	float: left;
+	margin-left: 10px;
+}
+
+.valorGasto {
+	float: right;
+	margin-right: 10px;
+}
+
+#imgPreview {
+	margin-top: 10px;
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+}

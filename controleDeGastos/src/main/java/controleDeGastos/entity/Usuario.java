@@ -1,8 +1,13 @@
 package controleDeGastos.entity;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import database.EntityInterface;
 
@@ -101,6 +106,30 @@ public class Usuario implements EntityInterface {
 		}
 		
 		return listaUsuario.isEmpty()? null : listaUsuario;
+	}
+	
+	public String getJson() throws IOException {
+		StringBuilder build = new StringBuilder();
+		build.append("{");
+		build.append("\"").append("id").append("\":").append(this.id).append(",");
+		build.append("\"").append("nome").append("\":\"").append(this.nome).append("\",");
+		build.append("\"").append("sobreNome").append("\":\"").append(this.sobreNome).append("\",");
+		build.append("\"").append("email").append("\":\"").append(this.email).append("\",");
+		build.append("\"").append("foto").append("\":\"").append(getImagem(this.foto)).append("\"");
+		build.append("}");
+		
+		return build.toString();
+	}
+	
+	private String getImagem(String foto) throws IOException {
+		String fotoNova = "";
+		
+		if(StringUtils.isNotBlank(foto)) {
+			byte [] fotoBytes = Files.readAllBytes(Paths.get(this.foto));
+			fotoNova = new String(fotoBytes);
+		}
+		
+		return fotoNova;
 	}
 
 	public Long getId() {

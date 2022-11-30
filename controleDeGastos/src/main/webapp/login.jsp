@@ -22,7 +22,12 @@
 					data: frmData,
 					type: "POST",
 					success: function( data ) {
-						$("#loginInvalido").html(data);
+						if(data == 'true') {
+							window.location.href = 'home.jsp';
+						}
+						else {
+							$("#loginInvalido").html(data);							
+						}
 					}
 				});
 			});

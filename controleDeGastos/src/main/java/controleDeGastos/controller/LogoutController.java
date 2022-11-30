@@ -8,11 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controleDeGastos.excption.ConstraintExcption;
 import controleDeGastos.model.LoginModel;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -25,31 +24,13 @@ public class LoginController extends HttpServlet {
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
-			String email = req.getParameter("email");
-			String senha = req.getParameter("senha");
-			
-			loginModel.login(req.getSession(), email, senha);
-			resp.getWriter().print("true");
-		}
-		catch (ConstraintExcption e) {
-			resp.setCharacterEncoding("UTF-8");
-			resp.getWriter().print(e.getMensagensConstraint());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			resp.getWriter().print(loginModel.sessaoAberta(req.getSession()));
+			loginModel.fecharSessao(req.getSession());
+			resp.getWriter().print("login.jsp");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 }

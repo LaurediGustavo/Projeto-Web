@@ -10,9 +10,9 @@ import java.util.List;
 
 import database.EntityInterface;
 
-public class Gasto implements EntityInterface {
+public class Ganho implements EntityInterface {
 	
-	private final String NOME_ENTIDADE = "gasto";
+	private final String NOME_ENTIDADE = "ganho";
 
 	private final String CAMPO_CHAVE = "id";
 	
@@ -24,21 +24,21 @@ public class Gasto implements EntityInterface {
 	
 	private BigDecimal valor;
 	
-	private Date dataDoGasto;
+	private Date dataDoGanho;
 	
 	private String descricao;
 	
 	private Long idUsuario;
 
-	public Gasto() {
+	public Ganho() {
 		super();
 	}
 
-	public Gasto(Long id, BigDecimal valor, Date dataDoGasto, String descricao, Long idUsuario) {
+	public Ganho(Long id, BigDecimal valor, Date dataDoGanho, String descricao, Long idUsuario) {
 		super();
 		this.id = id;
 		this.valor = valor;
-		this.dataDoGasto = dataDoGasto;
+		this.dataDoGanho = dataDoGanho;
 		this.idUsuario = idUsuario;
 		this.descricao = descricao;
 	}
@@ -53,7 +53,7 @@ public class Gasto implements EntityInterface {
 		StringBuilder campos = new StringBuilder();
 		campos.append("id").append(",");
 		campos.append("valor").append(",");
-		campos.append("dataDoGasto").append(",");
+		campos.append("dataDoGanho").append(",");
 		campos.append("descricao").append(",");
 		campos.append("idUsuario");
 		
@@ -72,7 +72,7 @@ public class Gasto implements EntityInterface {
 		String[] valores = new String[] {
 			this.id == null? "0" : id.toString(),
 			this.valor == null? "" : valor.toString(),
-			this.dataDoGasto == null? "" : df.format(dataDoGasto),
+			this.dataDoGanho == null? "" : df.format(dataDoGanho),
 			this.descricao == null? "" : descricao,
 			this.idUsuario == null? "" : this.idUsuario.toString(),
 		};
@@ -92,20 +92,20 @@ public class Gasto implements EntityInterface {
 	@Override
 	public List<?> toList(ResultSet rs) throws Exception {
 		DateFormat df = new SimpleDateFormat(DATE_PATTERN);
-		List<Gasto> listaGasto = new ArrayList<Gasto>();
+		List<Ganho> listaGanho = new ArrayList<Ganho>();
 
 		while(rs.next()) {
-			Gasto gasto = new Gasto();      
-			gasto.setId(Long.parseLong(rs.getString("id")));
-			gasto.setValor(new BigDecimal(rs.getString("valor")));
-			gasto.setDataDoGasto(df.parse(rs.getString("dataDoGasto")));
-			gasto.setDescricao(rs.getString("descricao"));
-			gasto.setIdUsuario(Long.parseLong(rs.getString("idUsuario")));
+			Ganho ganho = new Ganho();      
+			ganho.setId(Long.parseLong(rs.getString("id")));
+			ganho.setValor(new BigDecimal(rs.getString("valor")));
+			ganho.setDataDoGanho(df.parse(rs.getString("dataDoGanho")));
+			ganho.setDescricao(rs.getString("descricao"));
+			ganho.setIdUsuario(Long.parseLong(rs.getString("idUsuario")));
 			
-			listaGasto.add(gasto);
+			listaGanho.add(ganho);
 		}
 		
-		return listaGasto.isEmpty()? null : listaGasto;
+		return listaGanho.isEmpty()? null : listaGanho;
 	}	
 	
 	public String getJson() {
@@ -115,7 +115,7 @@ public class Gasto implements EntityInterface {
 		build.append("{");
 		build.append("\"").append("id").append("\":").append(this.id).append(",");
 		build.append("\"").append("valor").append("\":\"").append(this.valor.toString()).append("\",");
-		build.append("\"").append("data").append("\":\"").append(df.format(dataDoGasto)).append("\",");
+		build.append("\"").append("data").append("\":\"").append(df.format(dataDoGanho)).append("\",");
 		build.append("\"").append("descricao").append("\":\"").append(this.descricao).append("\",");
 		build.append("\"").append("idUsuario").append("\":").append(this.idUsuario);
 		build.append("}");
@@ -139,12 +139,12 @@ public class Gasto implements EntityInterface {
 		this.valor = valor;
 	}
 
-	public Date getDataDoGasto() {
-		return dataDoGasto;
+	public Date getDataDoGanho() {
+		return dataDoGanho;
 	}
 
-	public void setDataDoGasto(Date dataDoGasto) {
-		this.dataDoGasto = dataDoGasto;
+	public void setDataDoGanho(Date dataDoGanho) {
+		this.dataDoGanho = dataDoGanho;
 	}
 
 	public Long getIdUsuario() {
@@ -165,8 +165,8 @@ public class Gasto implements EntityInterface {
 
 	@Override
 	public String toString() {
-		return "Gasto [NOME_ENTIDADE=" + NOME_ENTIDADE + ", id=" + id + ", valor=" + valor + ", dataDoGasto="
-				+ dataDoGasto + ", descricao=" + descricao + ", idUsuario=" + idUsuario + "]";
+		return "Ganho [NOME_ENTIDADE=" + NOME_ENTIDADE + ", id=" + id + ", valor=" + valor + ", dataDoGanho="
+				+ dataDoGanho + ", descricao=" + descricao + ", idUsuario=" + idUsuario + "]";
 	}
 	
 }

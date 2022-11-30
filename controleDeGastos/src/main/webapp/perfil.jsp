@@ -13,9 +13,12 @@
 	<link rel="Stylesheet" type="text/css" href="css/estilo.css">
 	
 	<script type="text/javascript">
- 		
+		
 	  	$(document).ready(function() {
-			$("#inputFile").change(function (event) {
+	  		validarLogin();
+	  		preencherCampos();
+	  		
+	  		$("#inputFile").change(function (event) {
 				var file = event.target.files[0];
 				var reader = new FileReader();
 				reader.readAsDataURL( file );
@@ -45,6 +48,33 @@
 				});
 			});
 		});
+	  	
+	  	function preencherCampos() {
+	  		$.ajax({
+				url: "usuario",
+				type: "GET",
+				success: function(data) {
+					var usuario = JSON.parse(data);
+					
+					$("#id").val(usuario.id);
+					$("#nome").val(usuario.nome);
+					$("#sobrenome").val(usuario.sobreNome);
+					$("#email").val(usuario.email);
+				}
+			});
+	  	}
+	  	
+	  	function validarLogin() {
+	  		$.ajax({
+				url: "login",
+				type: "GET",
+				success: function( data ) {
+					if(data == "false") {
+						window.location.href = 'login.jsp';
+					}
+				}
+			});
+	  	}
   
 	</script>
 </head>
@@ -63,20 +93,22 @@
 				    </div>
    				    <div class="form-group">
 			      		<label for="email">Email:</label>
-				      	<input type="email" class="form-control" maxlength="100" id="email" placeholder="Digite seu email" name="email" required>
+				      	<input type="email" readonly="true" maxlength="100" class="form-control" id="email" placeholder="Digite seu email" name="email" required>
 				    </div>
-   				    <div class="form-group">
+				    <div class="form-group">
 			      		<label for="email">Senha:</label>
 				      	<input type="password" class="form-control" maxlength="100" id="senha" placeholder="Digite sua Senha" name="senha" required>
 				    </div>
 				    <input type="hidden" id="foto" name="foto" value="">
+				    <input type="hidden" id="id" name="id" value="">
 			   	</form>
 				<div class="form-group mt-3">
-					<label for="inputFile">Foto:</label><br />
+					<label for="foto">Foto:</label><br />
 					<input id="inputFile" type="file" class="file">
 				</div>
 			    <div class="form-group text-center mt-5">
-				    <button id="btnEnviar" class="btn btn-outline-light btn-lg px-5" type="button">Cadastrar</button>				    
+				    <button id="btnEnviar" class="btn btn-outline-light btn-lg px-5" type="button">Atualizar</button>
+				    <a href="home.jsp" id="btnVoltar" class="btn btn-outline-light btn-lg px-5" type="button">Voltar</a>				    
 			    </div>
 			</div>
 		</div>
